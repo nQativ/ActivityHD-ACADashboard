@@ -1,0 +1,588 @@
+<XML ID="{4AE0010F-B62D-4A27-B137-74F578498072}" Type="Macros">
+	<data Code="ACA Note as Declined" ID="{5CF704B6-019D-4142-A452-7175B28EDA30}">
+		<Name Value="ACA Note as Declined"/>
+		<Description Value="Add ACADeclined Note to ACA Record"/>
+		<MacroType Value="Record Loop"/>
+		<EnableResults Value="True"/>
+		<Shortcut/>
+		<RecordType Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}"/>
+		<RunFrom Value="ACA Records (Payroll)">
+			<item Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}" Assigned="True"/>
+		</RunFrom>
+		<Using/>
+		<MacroScript>'-ACA Record Data
+set aca_data = RecordLoop.Data
+aca_data.Edit
+
+'-Validate
+if (aca_data.Fields("Type").Value &lt;&gt; "Result") then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record Type must be Result."
+end if
+if IsNull(aca_data.Fields("NotifyNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record does not have a Notify Note."
+else
+  set note_data = Company.Payroll.PRNote
+  note_data.Locate aca_data.Fields("NotifyNote").ValueInternal
+  if (note_data.Fields("PRNoteType").Value &lt;&gt; "ACANotifyOffer") then
+    Err.Raise vbObjectError, "MacroSource", "The ACA Record does not have an Offer Notify Note."
+  end if
+end if
+if not IsNull(aca_data.Fields("ResponseNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record already has a Response."
+end if
+
+'-Create a new PR Note record:
+note_type = "ACADeclined"
+note_desc = "Declined coverage"
+
+set note_data = Company.Payroll.PRNote
+note_data.New
+note_data.Fields("PRNoteType").Value = note_type
+note_data.Fields("NoteDate").Value = now
+note_data.Fields("Description").Value = note_desc
+note_data.Fields("References/Employees").Items.Add aca_data.Fields("PREmployee").ValueInternal
+note_data.Fields("References/Records").Items.Add aca_data.Fields("PRACARecord").Value
+note_data.Save
+
+RecordLoop.Results.Add note_data
+RecordLoop.AddMessage note_type + " Note created"
+
+'-Update the selected ACA Record:
+aca_data.Fields("IsLocked").Value = False
+aca_data.Fields("ResponseNote").ValueInternal = note_data.Fields("PRNote").Value
+aca_data.Fields("IsLocked").Value = True
+aca_data.Save</MacroScript>
+		<MacroScriptInit/>
+		<MacroScriptFinal/>
+		<AccessControl Value="All"/>
+		<Permissions/>
+		<Obsolete Value="False"/>
+		<CustomData>
+			<Field Name="Category" Value="{77CA96ED-8666-419E-933C-2830654AB548}"/>
+		</CustomData>
+		<Memo/>
+		<CreateDate Value="2016-05-25T17:12:16.457"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-25T09:10:07.057"/>
+		<ReviseUser Value="bandersen"/>
+	</data>
+	<data Code="ACA Note as Selected" ID="{CC394FBF-9B28-4CE8-B8BD-6DD55758A320}">
+		<Name Value="ACA Note as Selected"/>
+		<Description Value="Add ACASelected Note to ACA Record"/>
+		<MacroType Value="Record Loop"/>
+		<EnableResults Value="True"/>
+		<Shortcut/>
+		<RecordType Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}"/>
+		<RunFrom Value="ACA Records (Payroll)">
+			<item Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}" Assigned="True"/>
+		</RunFrom>
+		<Using/>
+		<MacroScript>'-ACA Record Data
+set aca_data = RecordLoop.Data
+aca_data.Edit
+
+'-Validate
+if (aca_data.Fields("Type").Value &lt;&gt; "Result") then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record Type must be Result."
+end if
+if IsNull(aca_data.Fields("NotifyNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record does not have a Notify Note."
+else
+  set note_data = Company.Payroll.PRNote
+  note_data.Locate aca_data.Fields("NotifyNote").ValueInternal
+  if (note_data.Fields("PRNoteType").Value &lt;&gt; "ACANotifyOffer") then
+    Err.Raise vbObjectError, "MacroSource", "The ACA Record does not have an Offer Notify Note."
+  end if
+end if
+if not IsNull(aca_data.Fields("ResponseNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record already has a Response."
+end if
+
+'-Create a new PR Note record:
+note_type = "ACASelected"
+note_desc = "Selected plan"
+
+set note_data = Company.Payroll.PRNote
+note_data.New
+note_data.Fields("PRNoteType").Value = note_type
+note_data.Fields("NoteDate").Value = now
+note_data.Fields("Description").Value = note_desc
+note_data.Fields("References/Employees").Items.Add aca_data.Fields("PREmployee").ValueInternal
+note_data.Fields("References/Records").Items.Add aca_data.Fields("PRACARecord").Value
+note_data.Save
+
+RecordLoop.Results.Add note_data
+RecordLoop.AddMessage note_type + " Note created"
+
+'-Update the selected ACA Record:
+aca_data.Fields("IsLocked").Value = False
+aca_data.Fields("ResponseNote").ValueInternal = note_data.Fields("PRNote").Value
+aca_data.Fields("IsLocked").Value = True
+aca_data.Save</MacroScript>
+		<MacroScriptInit/>
+		<MacroScriptFinal/>
+		<AccessControl Value="All"/>
+		<Permissions/>
+		<Obsolete Value="False"/>
+		<CustomData>
+			<Field Name="Category" Value="{77CA96ED-8666-419E-933C-2830654AB548}"/>
+		</CustomData>
+		<Memo/>
+		<CreateDate Value="2016-05-25T16:10:40.793"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-25T09:10:07.193"/>
+		<ReviseUser Value="bandersen"/>
+	</data>
+	<data Code="ACA Notify Employee of Expire" ID="{9F9EB17E-4E10-4516-AB3E-D4FA9BE01224}">
+		<Name Value="ACA Notify Employee of Expire"/>
+		<Description Value="Create Expire pdf and Email or Print per DistributionEmail"/>
+		<MacroType Value="Record Loop"/>
+		<EnableResults Value="True"/>
+		<Shortcut/>
+		<RecordType Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}"/>
+		<RunFrom Value="ACA Records (Payroll)">
+			<item Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}" Assigned="True"/>
+		</RunFrom>
+		<Using Value="Word_Tools">
+			<item Code="Word_Tools" ID="{CB950E4E-29B1-45D7-80C9-3B82C43A7846}" Assigned="True"/>
+		</Using>
+		<MacroScript>dim aca_data
+set aca_data = recordloop.data
+aca_data.Edit
+
+'Stop
+
+'-Validate ACA Record
+if (aca_data.Fields("Type").Value &lt;&gt; "Result") then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record Type must be Result."
+end if
+if IsNull(aca_data.Fields("NotifyNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record does not have a Notify Note."
+end if
+if not IsNull(aca_data.Fields("NotifiedNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record already has a Notified Note."
+end if
+
+RecordLoop.AddMessage "PREmployee GUID on this ACARecord" + aca_data.Fields("PREmployee").ValueInternal
+
+Dim employee_data 
+Set employee_data = company.Payroll.PREmployee
+
+employee_data.Locate aca_data.Fields("PREmployee").ValueInternal
+
+' --- Collect Dictionary Content for Word document ---
+with dictContent
+	dictContent.RemoveAll
+
+    ' -- Employee Information
+    .Add "ccEmployeeCode" , employee_data.Code
+    .Add "ccEmployeeName", employee_data.FirstNameFirst
+    .Add "ccEmployeeBirthDate", employee_data.BirthDate
+
+    ' -- ACA Result Record Information
+    .Add "ccACAStabilityBegin", aca_data.Fields("StabilityPeriodBegin").Value
+    .Add "ccACAStabilityEnd", aca_data.Fields("StabilityPeriodEnd").Value
+
+end with
+
+dim working_word_file
+working_word_file = tmp_folder + "\Employee_HealthInsExpire.docx"
+
+fso.CopyFile tmp_word_file, working_word_file 
+
+dim word_file
+set word_file = fso.GetFile(working_word_file)
+word_file.Attributes = word_file.Attributes xor 1
+
+dim word_doc
+set word_doc = word_object.Documents.Open(working_word_file)
+
+Word_tools.ReplaceContentControls word_doc, dictContent
+
+dim pdf_filename
+pdf_filename = tmp_folder + "\Employee_HealthInsExpire_" + dictContent("ccEmployeeCode") + ".pdf"
+word_doc.ExportAsFixedFormat pdf_filename, 17
+word_doc.Close False
+
+if (fso.FileExists(pdf_filename)) then
+
+    sendToEmail = ""
+    if (employee_data.DistributionEmail = "H") then
+        sendToEmail = employee_data.HomeEmail
+    elseif (employee_data.DistributionEmail = "W") then
+        sendToEmail = employee_data.WorkEmail
+    end if
+
+    if (sendToEmail &lt;&gt; "") then
+'-Email the pdf
+    	RecordLoop.AddMessage "Emailing " + pdf_filename
+        Set objEmail  = CreateObject("Outlook.Application")
+        Set EmailItem = objEmail.CreateItem(olMailItem)
+
+        With EmailItem
+            .To   = sendToEmail
+            .Subject = "ACA Health Coverage Expire"
+            .Body = "Please see the attached notification and take appropriate actions."
+            .Attachments.Add pdf_filename
+            .Send
+        End With
+        note_desc = "Expire sent via Email to " + sendToEmail
+    Else
+'-Print the pdf
+    	RecordLoop.AddMessage "Printing " + pdf_filename
+        CreateObject("Shell.Application").Namespace(0).ParseName(pdf_filename).InvokeVerbEx("Print")
+        note_desc = "Expire sent via Print"
+    end if
+
+'-Create a new Note
+    note_type = "ACANotified"
+
+    set note_data = Company.Payroll.PRNote
+    note_data.New
+    note_data.Fields("PRNoteType").Value = note_type
+    note_data.Fields("NoteDate").Value = now
+    note_data.Fields("Description").Value = note_desc
+    note_data.Fields("References/Employees").Items.Add aca_data.Fields("PREmployee").ValueInternal
+    note_data.Fields("References/Records").Items.Add aca_data.Fields("RecordNumber").Value
+    note_data.Save
+
+    note_data.Fields("Attachments").Items.Add pdf_filename
+
+    RecordLoop.Results.Add note_data
+    RecordLoop.AddMessage note_type + " Note created for " + employee_data.FirstNameFirst
+    RecordLoop.AddMessage "and attached " &amp; document_name &amp; " to this new note."
+
+    '-Update the selected ACA Record
+    aca_data.Fields("IsLocked").Value = False
+    aca_data.Fields("NotifiedNote").ValueInternal = note_data.Fields("PRNote").Value
+    aca_data.Fields("IsLocked").Value = True
+    aca_data.Save
+
+    '-Clear the Recall Date from the "NotifyNote" note
+    note_data.Locate aca_data.Fields("NotifyNote").Value
+    if (CStr(note_data.Fields("Number").Value) = aca_data.Fields("NotifyNote").Value) then 
+        note_data.Edit
+        note_data.Fields("RecallDate").Value = Null
+
+        note_data.Save
+    else
+        RecordLoop.AddMessage "Did not update the Recall Date"
+    end if
+
+else
+    RecordLoop.AddMessage "Error: The Expire document was not created."
+End if
+
+'fso.DeleteFile working_word_file
+'fso.DeleteFile pdf_filename</MacroScript>
+		<MacroScriptInit>dim word_object
+set word_object = CreateObject("Word.Application")
+
+'stop
+
+dim dictContent 
+set dictContent = CreateObject("Scripting.Dictionary")
+
+dim macro_data
+set macro_data = company.Administration.Macro
+macro_data.Locate "ACA Notify Employee of Expire"
+dim tmp_word_file
+tmp_word_file = macro_data.Attachments.SaveAsTempFile("Employee_HealthInsExpire.docx")
+'msgbox tmp_word_file
+
+dim note_data
+set note_data = company.Payroll.PRNote
+
+dim fso
+set fso = CreateObject("Scripting.FileSystemObject")
+dim tmp_folder
+tmp_folder = fso.GetParentFolderName(tmp_word_file)</MacroScriptInit>
+		<MacroScriptFinal>
+set word_object = nothing</MacroScriptFinal>
+		<AccessControl Value="All"/>
+		<Permissions/>
+		<Obsolete Value="False"/>
+		<CustomData>
+			<Field Name="Category" Value="{77CA96ED-8666-419E-933C-2830654AB548}"/>
+		</CustomData>
+		<Memo>For each ACA Record selected this macro does the following:
+1. Validation (Displays error and skips record when not valid)
+   a. Must be an ACA Result record, not a Designation record
+   b. Must have a Notify Note referenced
+   c. Must not already have a Notified Note
+2. Creates a PDF file to be used as the Employee Health Insurance Expire
+   a. Using a Word template file:  Employee_HealthInsExpire.docx  (Attached)
+   b. The PDF includes the Employee name, Coverage Begin date and other helpful info about the employee
+   c. The Word template can be easily modified for coverage options and layout
+3. Email the PDF to employees (when the Employee record has DistributionEmail selected)
+4. Print the PDF for employee (when the Employee record has NO DistributionEmail selected)
+5. Create Notified Note records with the PDF attached and the Note Description stating how the employee was notified (via Print or via Email to &lt;email address&gt;)
+6. Update the reference field of the ACA Result record with the GUID of the Notified Note record that was just created
+
+Setup Instructions:
+1. Create an Activity Macro record on the company database
+   a. Export this macro and the "Word-Tools" macro that is also used
+   b. Import the resulting xml in the Activity Macro folder of the target company
+2. Modify the Word template attachment to reflect the Insurance options at this customer site
+
+HR Staff Instructions for how to use this Activity Macro:
+1. Click the “Pending Notification of Expire” link on the ACA Monthly Operations dashboard gadget.
+2. Select the employees listed in the filtered view of ACA Result Records
+3. Run the Activity Macro named ACA Notify Employee of Expire
+4. Verify any PDFs that print to your default printer match the newly created Note records with a description saying “Notified via Print”
+   a. Of course any printed notification must be delivered to the employee
+5. Verify sent email from Outlook matches the newly created Note records with a description saying “Notified via Email sent to &lt;email address&gt;”
+</Memo>
+		<CreateDate Value="2016-08-23T13:49:07.197"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-25T09:10:07.343"/>
+		<ReviseUser Value="bandersen"/>
+	</data>
+	<data Code="ACA Notify Employee of Offer" ID="{2A8D68D9-5726-4C66-9F95-E48CD5ADC2D1}">
+		<Name Value="ACA Notify Employee of Offer"/>
+		<Description Value="Create Offer pdf and Email or Print per DistributionEmail"/>
+		<MacroType Value="Record Loop"/>
+		<EnableResults Value="True"/>
+		<Shortcut/>
+		<RecordType Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}"/>
+		<RunFrom Value="ACA Records (Payroll)">
+			<item Code="ACA Records (Payroll)" ID="{99F43513-6130-497E-B4CD-B3FD4CF686A8}" Assigned="True"/>
+		</RunFrom>
+		<Using Value="Word_Tools">
+			<item Code="Word_Tools" ID="{CB950E4E-29B1-45D7-80C9-3B82C43A7846}" Assigned="True"/>
+		</Using>
+		<MacroScript>'option explicit
+
+dim aca_data
+set aca_data = recordloop.data
+aca_data.Edit
+
+'Stop
+
+'-Validate ACA Record
+if (aca_data.Fields("Type").Value &lt;&gt; "Result") then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record Type must be Result."
+end if
+if IsNull(aca_data.Fields("NotifyNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record does not have a Notify Note."
+end if
+if not IsNull(aca_data.Fields("NotifiedNote").ValueInternal) then
+  Err.Raise vbObjectError, "MacroSource", "The ACA Record already has a Notified Note."
+end if
+
+RecordLoop.AddMessage "PREmployee GUID on this ACARecord" + aca_data.Fields("PREmployee").ValueInternal
+
+Dim employee_data 
+Set employee_data = company.Payroll.PREmployee
+
+employee_data.Locate aca_data.Fields("PREmployee").ValueInternal
+
+' --- Collect Dictionary Content for Word document ---
+with dictContent
+	dictContent.RemoveAll
+
+    ' -- Employee Information
+    .Add "ccEmployeeCode" , employee_data.Code
+    .Add "ccEmployeeName", employee_data.FirstNameFirst
+    .Add "ccEmployeeBirthDate", employee_data.BirthDate
+
+    ' -- ACA Result Record Information
+    .Add "ccACAStabilityBegin", aca_data.Fields("StabilityPeriodBegin").Value
+    .Add "ccACAStabilityEnd", aca_data.Fields("StabilityPeriodEnd").Value
+
+end with
+
+dim working_word_file
+working_word_file = tmp_folder + "\Employee_HealthInsOffer.docx"
+
+fso.CopyFile tmp_word_file, working_word_file 
+
+dim word_file
+set word_file = fso.GetFile(working_word_file)
+word_file.Attributes = word_file.Attributes xor 1
+
+dim word_doc
+set word_doc = word_object.Documents.Open(working_word_file)
+
+Word_tools.ReplaceContentControls word_doc, dictContent
+
+dim pdf_filename
+pdf_filename = tmp_folder + "\Employee_HealthInsOffer_" + dictContent("ccEmployeeCode") + ".pdf"
+word_doc.ExportAsFixedFormat pdf_filename, 17
+word_doc.Close False
+
+dim sendToEmail
+if (fso.FileExists(pdf_filename)) then
+
+    sendToEmail = ""
+    if (employee_data.DistributionEmail = "H") then
+        sendToEmail = employee_data.HomeEmail
+    elseif (employee_data.DistributionEmail = "W") then
+        sendToEmail = employee_data.WorkEmail
+    end if
+
+    if (sendToEmail &lt;&gt; "") then
+'-Email the pdf
+    	RecordLoop.AddMessage "Emailing " + pdf_filename
+        Set objEmail  = CreateObject("Outlook.Application")
+        Set EmailItem = objEmail.CreateItem(olMailItem)
+
+        With EmailItem
+            .To   = sendToEmail
+            .Subject = "ACA Health Coverage Offer"
+            .Body = "Please complete attached option form and return to the Human Resources department."
+            .Attachments.Add pdf_filename
+            .Send
+        End With
+        note_desc = "Offer sent via Email to " + sendToEmail
+    Else
+'-Print the pdf
+    	RecordLoop.AddMessage "Printing " + pdf_filename
+        CreateObject("Shell.Application").Namespace(0).ParseName(pdf_filename).InvokeVerbEx("Print")
+        note_desc = "Offer sent via Print"
+    end if
+
+'-Create a new Note
+    note_type = "ACANotified"
+
+    set note_data = Company.Payroll.PRNote
+    note_data.New
+    note_data.Fields("PRNoteType").Value = note_type
+    note_data.Fields("NoteDate").Value = now
+    note_data.Fields("Description").Value = note_desc
+    note_data.Fields("References/Employees").Items.Add aca_data.Fields("PREmployee").ValueInternal
+    note_data.Fields("References/Records").Items.Add aca_data.Fields("RecordNumber").Value
+    note_data.Save
+
+    note_data.Fields("Attachments").Items.Add pdf_filename
+
+    RecordLoop.Results.Add note_data
+    RecordLoop.AddMessage note_type + " Note created for " + employee_data.FirstNameFirst
+    RecordLoop.AddMessage "and attached " &amp; document_name &amp; " to this new note."
+
+    '-Update the selected ACA Record
+    aca_data.Fields("IsLocked").Value = False
+    aca_data.Fields("NotifiedNote").ValueInternal = note_data.Fields("PRNote").Value
+    aca_data.Fields("IsLocked").Value = True
+    aca_data.Save
+
+    '-Clear the Recall Date from the "NotifyNote" note
+    note_data.Locate aca_data.Fields("NotifyNote").Value
+    if (CStr(note_data.Fields("Number").Value) = aca_data.Fields("NotifyNote").Value) then 
+        note_data.Edit
+        note_data.Fields("RecallDate").Value = Null
+
+        note_data.Save
+    else
+        RecordLoop.AddMessage "Did not update the Recall Date"
+    end if
+
+else
+    RecordLoop.AddMessage "Error: The Offer document was not created."
+End if
+
+'fso.DeleteFile working_word_file
+'fso.DeleteFile pdf_filename</MacroScript>
+		<MacroScriptInit>dim word_object
+set word_object = CreateObject("Word.Application")
+
+'stop
+
+dim dictContent 
+set dictContent = CreateObject("Scripting.Dictionary")
+
+dim macro_data
+set macro_data = company.Administration.Macro
+macro_data.Locate "ACA Notify Employee of Offer"
+dim tmp_word_file
+tmp_word_file = macro_data.Attachments.SaveAsTempFile("Employee_HealthInsOffer.docx")
+'msgbox tmp_word_file
+
+dim note_data
+set note_data = company.Payroll.PRNote
+
+dim fso
+set fso = CreateObject("Scripting.FileSystemObject")
+dim tmp_folder
+tmp_folder = fso.GetParentFolderName(tmp_word_file)</MacroScriptInit>
+		<MacroScriptFinal>
+set word_object = nothing</MacroScriptFinal>
+		<AccessControl Value="All"/>
+		<Permissions/>
+		<Obsolete Value="False"/>
+		<CustomData>
+			<Field Name="Category" Value="{77CA96ED-8666-419E-933C-2830654AB548}"/>
+		</CustomData>
+		<Memo>For each ACA Record selected this macro does the following:
+1. Validation (Displays error and skips record when not valid)
+   a. Must be an ACA Result record, not a Designation record
+   b. Must have a Notify Note referenced
+   c. Must not already have a Notified Note
+2. Creates a PDF file to be used as the Employee Health Insurance Offer
+   a. Using a Word template file:  Employee_HealthInsOffer.docx  (Attached)
+   b. The PDF includes the Employee name, Coverage Begin date and other helpful info about the employee
+   c. The Word template can be easily modified for coverage options and layout
+3. Email the PDF to employees (when the Employee record has DistributionEmail selected)
+4. Print the PDF for employee (when the Employee record has NO DistributionEmail selected)
+5. Create Notified Note records with the PDF attached and the Note Description stating how the employee was notified (via Print or via Email to &lt;email address&gt;)
+6. Update the reference field of the ACA Result record with the GUID of the Notified Note record that was just created
+
+Setup Instructions:
+1. Create an Activity Macro record on the company database
+   a. Export this macro and the "Word-Tools" macro that is also used
+   b. Import the resulting xml in the Activity Macro folder of the target company
+2. Modify the Word template attachment to reflect the Insurance options at this customer site
+
+HR Staff Instructions for how to use this Activity Macro:
+1. Click the “Pending Notification of Offer” link on the ACA Monthly Operations dashboard gadget.
+2. Select the employees listed in the filtered view of ACA Result Records
+3. Run the Activity Macro named ACA Notify Employee of Offer
+4. Verify any PDFs that print to your default printer match the newly created Note records with a description saying “Notified via Print”
+   a. Of course any printed notification must be delivered to the employee
+5. Verify sent email from Outlook matches the newly created Note records with a description saying “Notified via Email sent to &lt;email address&gt;”
+</Memo>
+		<CreateDate Value="2016-07-14T14:11:51.470"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-25T09:10:07.473"/>
+		<ReviseUser Value="bandersen"/>
+	</data>
+	<data Code="Mark ACA Cal-Detail Processed" ID="{20A559B5-2EA3-418A-8B51-067188A28FC5}">
+		<Name Value="Mark ACA Cal-Detail Processed"/>
+		<Description Value="Mark ACA Calendar Detail as Processed"/>
+		<MacroType Value="Record Loop"/>
+		<EnableResults Value="True"/>
+		<Shortcut/>
+		<RecordType/>
+		<RunFrom Value="ACA Calendar Detail (Payroll)">
+			<item Code="ACA Calendar Detail (Payroll)" ID="{EDD9B1BA-6110-4A91-99E7-14AB0C18F11F}" Assigned="True"/>
+		</RunFrom>
+		<Using/>
+		<MacroScript>'-ACA Calendar Data
+dim ACACal_data
+set ACACal_data = RecordLoop.Data
+
+'-ACA Calendar Detail Data
+dim ACACalDetail_data
+set ACACalDetail_data = ACACal_data.CalendarDetail
+ACACalDetail_data.Edit
+
+'-Update the selected ACA Calendar Detail record:
+ACACalDetail_data.Fields("Description").Value = "Processed"
+
+'-Save the ACA Calendar record
+ACACal_data.Save</MacroScript>
+		<MacroScriptInit/>
+		<MacroScriptFinal/>
+		<AccessControl Value="All"/>
+		<Permissions/>
+		<Obsolete Value="False"/>
+		<CustomData>
+			<Field Name="Category" Value="{77CA96ED-8666-419E-933C-2830654AB548}"/>
+		</CustomData>
+		<Memo/>
+		<CreateDate Value="2016-08-23T20:51:59.917"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-25T09:10:07.597"/>
+		<ReviseUser Value="bandersen"/>
+	</data>
+</XML>

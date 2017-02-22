@@ -1,0 +1,357 @@
+<XML ID="{02D38A8F-2A78-4EB2-AF9F-C43DB3104DB4}" Type="Dashboard Gadgets">
+	<data Code="ACA Articles" ID="{27A79687-6EC9-48C2-B72D-A45F5877CB3A}">
+		<Name Value="ACA Articles"/>
+		<Code Value="ACA Articles"/>
+		<Description Value="Affordable Care Act - Articles taged &quot;ACA Articles&quot;"/>
+		<Gadget>&lt;gadgets xml:space="preserve"&gt;
+&lt;gadget type="Article" title="ACA End of Year" created="201604112300" modified="201604112311" tags="[[ACA Articles]] [[ACA Actions]]"&gt;*&amp;lt;&amp;lt;action
+   label: "Run ACA Proof 1095-Cs Report"
+   package: "Payroll"
+   folder: "Employees"
+   action: "Proof1095Cs"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Specify Options'&amp;gt;
+       &amp;lt;Answer Name='Selected Employer'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+      &amp;lt;Step Name='Review Report'&amp;gt;
+       &amp;lt;Answer Name='Include SSN'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+
+*&amp;lt;&amp;lt;action
+   label: "Print ACA Employee 1095-Cs"
+   package: "Payroll"
+   folder: "Employees"
+   action: "PrintEmployee1095Cs"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Specify Options'&amp;gt;
+       &amp;lt;Answer Name='Current Year'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+      &amp;lt;Step Name='Print 1095-Cs'&amp;gt;
+       &amp;lt;Answer Name='By Dept and Name'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+      &amp;lt;Step Name='Create 1095-C Records'&amp;gt;
+       &amp;lt;Answer Name='Mail - Notice Date Today'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+**Click ''Next'' until you get to the ''Print 1095-Cs'' Step,
+***Then Click the ''Print'' Action button toward the top of the window.
+**Click ''Next'' until you get to the ''Finish'' option.
+***After ''Finish'' you will be able to run the 
+
+*__Report to IRS - Print Option__
+**&amp;lt;&amp;lt;action
+   label: "Print ACA IRS 1095-Cs"
+   package: "Payroll"
+   folder: "Employees"
+   action: "PrintIRS1095Cs"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Specify Options'&amp;gt;
+       &amp;lt;Answer Name='Current Year'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+      &amp;lt;Step Name='Print 1095-Cs'&amp;gt;
+       &amp;lt;Answer Name='By Name'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+      &amp;lt;Step Name='Create 1094-C Note'&amp;gt;
+       &amp;lt;Answer Name='1094-C Note'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+***Click ''Next'' until you get to the ''Print 1095-Cs'' Step,
+****Then Click the ''Print'' Action button toward the top of the window.
+***Click ''Next'' until you get to the ''Print 1094-C'' Step,
+****Then Click the ''Print'' Action button toward the top of the window.
+***Click ''Next'' until you get to the ''Finish'' option.
+****After ''Finish'' you will be able to mail the Printed forms to the IRS.
+
+*__OR Report to IRS - Electronic Option__
+**&amp;lt;&amp;lt;action
+   label: "Create the 1095-C Transmittal file for upload to the IRS"
+   package: "Payroll"
+   folder: "Employees"
+   action: "CreateIRS1095CTransmission"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Specify Options'&amp;gt;
+       &amp;lt;Answer Name='Current Year'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+***Click ''Next'' until you get to ''Finish''
+***The output files will located in this folder path:
+****[[nQativDemoShared|file:\\compu-share\data\csms\nQativDemoShared\]]&lt;/gadget&gt;
+&lt;gadget type="Article" title="ACA Instructions - Notification Steps" created="201604122050" modified="201604131510" tags="[[ACA Articles]]"&gt;!Employee Notification
+!!Offer
+''Click'' the Link on the dashboard "99 - ''Pending Notification of Offer''" to see which, if any, employees need to be notified of a health coverage offer.
+#''Contact each employee listed'' and provide them with the applicable health coverage options.
+#*Emphasize the need for timely response to allow coverage to begin as of the Stability Period begin date.
+#Update the ACA Record to record when the employee was Notified
+##''Open the ACA Record'' and click on the ''"Notes"'' tab
+##Click the "''Create a New Note''" button (Green Plus)
+##Type "''ACANotified''" in the "''Type''" field OR use ''F3'' to find that Note Type
+##Type any text that would be helpful in documenting the communication with the employee.
+##Set the Recall Date to allow reminder to be viewed for any followup you wish. For example you might want to follow-up with employees that have not responded to an offer by the last week before coverage would begin.
+##Save and Close the new Note record
+##Click the ''ACA Record'' tab on the left
+##Click in the ''Notified'' field and press ''F3''
+##Select the new Note you just created (with Note Type of "ACANotified")
+##You may also want to also clear the recall date of the Notify Note (Note Type of "ACANotifyOffer") to indicate no further action needed on that note
+!!Expiration
+''Click'' the Link on the dashboard "99 - ''Pending Notification of Expiration''" to see which, if any, employees need to be notified of a health coverage expiration.
+#''Contact each employee listed'' and warn them when their health coverage is scheduled to expire.
+#Update the ACA Record to record when the employee was Notified
+##''Open the ACA Record'' and click on the ''"Notes"'' tab
+##Click the "''Create a New Note''" button (Green Plus)
+##Type "''ACANotified''" in the "''Type''" field OR use ''F3'' to find that Note Type
+##Type any text that would be helpful in documenting the communication with the employee.
+##Save and Close the new Note record
+##Click the ''ACA Record'' tab on the left
+##Click in the ''Notified'' field and press ''F3''
+##Select the new Note you just created (with Note Type of "ACANotified")
+##You may also want to also clear the recall date of the Notify Note to indicate no further action needed on that note
+!Employee Response
+When a response is received from an employee,
+''Click'' the Link on the dashboard "99 - ''Waiting Response''" and find the employee in that list that responded.
+#Update the ACA Record to record the employees response.
+##''Open the ACA Record'' and click on the ''"Notes"'' tab
+##Click the "''Create a New Note''" button (Green Plus)
+##Type "''ACASelected''" or "''ACADeclined''" in the "''Type''" field OR use ''F3'' to find the Note Type
+##Type any text that would be helpful in documenting the communication with the employee.
+##Save and Close the new Note record
+##Click the ''ACA Record'' tab on the left
+##Click in the ''Response'' field and press ''F3''
+##Select the new Note you just created (with Note Type of "ACASelected" or "ACADeclined")
+##You may also want to also clear the recall date of the Notified Note to indicate no further action needed on that note&lt;/gadget&gt;
+&lt;gadget type="Article" title="ACA Monthly Operations" created="201604201908" modified="201604202114" tags="[[ACA Actions]] [[ACA Articles]]"&gt;__Monthly Operations__
+#Verify that ACA Designation Records exist for all New Hires, Terminations or Changes between Full-Time and Part-Time.
+#*&amp;lt;&amp;lt;count
+ label: "%0 - Employees with missing ACA Designation record for Hire Status since the beginning of last year"
+ package: "Payroll"
+ folder: "Employees"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='? Missing ACA Designation - Hired'&amp;gt;
+    &amp;lt;Parameter Name='Begin_Date' Expression='begin of year - 1 year'/&amp;gt;
+    &amp;lt;Parameter Name='End_Date' Expression='end of year'/&amp;gt;
+   &amp;lt;/Filter&amp;gt;
+  &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+#*&amp;lt;&amp;lt;count
+ label: "%0 - Employees with missing ACA Designation record for Termination Status since the beginning of last year"
+ package: "Payroll"
+ folder: "Employees"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='? Missing ACA Designation - Terminated'&amp;gt;
+    &amp;lt;Parameter Name='Begin_Date' Expression='begin of year - 1 year'/&amp;gt;
+    &amp;lt;Parameter Name='End_Date' Expression='end of year'/&amp;gt;
+   &amp;lt;/Filter&amp;gt;
+  &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+#*&amp;lt;&amp;lt;count
+ label: "%0 - Employees with missing ACA Designation record for switch between FT and PT since the beginning of last year"
+ package: "Payroll"
+ folder: "Employees"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='? Missing ACA Designation - PT/FT Switch'&amp;gt;
+    &amp;lt;Parameter Name='Begin_Date' Expression='begin of year - 1 year'/&amp;gt;
+    &amp;lt;Parameter Name='End_Date' Expression='end of year'/&amp;gt;
+   &amp;lt;/Filter&amp;gt;
+  &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+#&amp;lt;&amp;lt;action
+ label: "Create ACA Result Records for the Measurement Period that just ended"
+ action: "CreateACARecords"
+ package: "Payroll"
+ folder: "Employees"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Step Name='Specify Options'&amp;gt;
+    &amp;lt;Answer Name='Current Calendar'/&amp;gt;
+   &amp;lt;/Step&amp;gt;
+  &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+#*&amp;lt;&amp;lt;count
+ label: "%0 - ACA Result Record(s) Created this month"
+ package: "Payroll"
+ folder: "ACA Records"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='Result Records'/&amp;gt;
+   &amp;lt;Filter Name='? Created Date Range'&amp;gt;
+    &amp;lt;Parameter Name='Date_Beginning' Expression='begin of month'/&amp;gt;
+    &amp;lt;Parameter Name='Date_Ending' Expression='end of month'/&amp;gt;
+   &amp;lt;/Filter&amp;gt;
+  &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+#ACA Result Records needing attention:
+&amp;lt;&amp;lt;slider chkACAInstructions1 [[ACA Instructions - Notification Steps]] "Instructions for Notification Steps" "Click to expand/colapse the Instruction text showing the steps for the Employee Notification and documentation of both notifications and responses from employees"&amp;gt;&amp;gt;
+#*&amp;lt;&amp;lt;count
+ label: "%0 - Pending Notification of Offer"
+ package: "Payroll"
+ folder: "ACA Records"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='Pending Notification of Offer'/&amp;gt;
+  &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+#*&amp;lt;&amp;lt;count
+ package: "Payroll"
+ folder: "ACA Records"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='Pending Notification of Expiration'/&amp;gt;
+  &amp;lt;/p&amp;gt;"
+ label: "%0 - Pending Notification of Expiration"
+&amp;gt;&amp;gt;
+#*&amp;lt;&amp;lt;count
+ package: "Payroll"
+ folder: "ACA Records"
+ parameters:
+  "&amp;lt;p&amp;gt;
+   &amp;lt;Filter Name='Waiting Response'/&amp;gt;
+  &amp;lt;/p&amp;gt;"
+ label: "%0 - Waiting Response"
+&amp;gt;&amp;gt;
+
+__Stability Period Statistics__
+
+|| Standard Stability Periods |&amp;gt;|&amp;gt;|h
+||Previous|Active|Upcoming|h
+|PT as ACA Full-Time| &amp;lt;&amp;lt;template ACA-SP-Stats 'PT as ACA Full-Time' 'Begin of Period 1 of Calendar "Month" - 1 year' 'End of Period 12 of Calendar "Month" - 1 year'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'PT as ACA Full-Time' 'Begin of Period 1 of Calendar "Month"' 'End of Period 12 of Calendar "Month"'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'PT as ACA Full-Time' 'Begin of Period 1 of Calendar "Month" + 1 year' 'End of Period 12 of Calendar "Month" + 1 year'&amp;gt;&amp;gt; |
+|Pending Notification| &amp;lt;&amp;lt;template ACA-SP-Stats 'Pending Notification' 'Begin of Period 1 of Calendar "Month" - 1 year' 'End of Period 12 of Calendar "Month" - 1 year'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Pending Notification' 'Begin of Period 1 of Calendar "Month"' 'End of Period 12 of Calendar "Month"'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Pending Notification' 'Begin of Period 1 of Calendar "Month" + 1 year' 'End of Period 12 of Calendar "Month" + 1 year'&amp;gt;&amp;gt; |
+|Waiting Response| &amp;lt;&amp;lt;template ACA-SP-Stats 'Waiting Response' 'Begin of Period 1 of Calendar "Month" - 1 year' 'End of Period 12 of Calendar "Month" - 1 year'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Waiting Response' 'Begin of Period 1 of Calendar "Month"' 'End of Period 12 of Calendar "Month"'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Waiting Response' 'Begin of Period 1 of Calendar "Month" + 1 year' 'End of Period 12 of Calendar "Month" + 1 year'&amp;gt;&amp;gt; |
+|Selected| &amp;lt;&amp;lt;template ACA-SP-Stats 'Selected' 'Begin of Period 1 of Calendar "Month" - 1 year' 'End of Period 12 of Calendar "Month" - 1 year'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Selected' 'Begin of Period 1 of Calendar "Month"' 'End of Period 12 of Calendar "Month"'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Selected' 'Begin of Period 1 of Calendar "Month" + 1 year' 'End of Period 12 of Calendar "Month" + 1 year'&amp;gt;&amp;gt; |
+|Declined| &amp;lt;&amp;lt;template ACA-SP-Stats 'Declined' 'Begin of Period 1 of Calendar "Month" - 1 year' 'End of Period 12 of Calendar "Month" - 1 year'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Declined' 'Begin of Period 1 of Calendar "Month"' 'End of Period 12 of Calendar "Month"'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Declined' 'Begin of Period 1 of Calendar "Month" + 1 year' 'End of Period 12 of Calendar "Month" + 1 year'&amp;gt;&amp;gt; |
+|Expired| &amp;lt;&amp;lt;template ACA-SP-Stats 'Expired' 'Begin of Period 1 of Calendar "Month" - 1 year' 'End of Period 12 of Calendar "Month" - 1 year'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Expired' 'Begin of Period 1 of Calendar "Month"' 'End of Period 12 of Calendar "Month"'&amp;gt;&amp;gt; | &amp;lt;&amp;lt;template ACA-SP-Stats 'Expired' 'Begin of Period 1 of Calendar "Month" + 1 year' 'End of Period 12 of Calendar "Month" + 1 year'&amp;gt;&amp;gt; |&lt;/gadget&gt;
+&lt;gadget type="Article" title="ACA Setup" created="201604112343" modified="201604112358" tags="[[ACA Articles]] [[ACA Actions]]"&gt;*Assign all Hourly Pay Segment Items to be members of Payroll Group, "ACAHours"
+*Create ACA Calendars to reflect Measurement Periods and Statbility Periods for your organization
+*Create ACA Categories needed to establish the default Offer Code, Cost, and Safe Harbor Code that should be used for a category of employees as of an effective date.
+*Assign the Employer intended status as ACA Designation record values for "Employee Designation" (Full-Time, Part-Time, Seasonal)
+**These are typically imported during implementation
+*Import Statistic adjustment checks as needed record Hours Paid for past periods not paid through Activity Payroll to allow enough history for correct calculation of Average Hours Paid during the measurement periods needed for the tax year you wish to report.
+*Run Create ACA Records for prior periods as needed.&lt;/gadget&gt;
+&lt;gadget type="Article" title="Employee Filters" created="201604120001" modified="201604120001" tags="[[ACA Articles]]"&gt;__Employee counts based on Average Hours in 2013 check history__
+*&amp;lt;&amp;lt;count
+   label: "%0 Employees with 30 or more Avg Hrs per Week using Payroll calendar"
+   package: "Payroll"
+   folder: "Employees"
+   parameters:
+     [[&amp;lt;p&amp;gt;
+       &amp;lt;Filter Name='? Avg Hrs = &amp;amp; above X'&amp;gt;
+         &amp;lt;Parameter Name='PRCalendar' Code='Payroll'/&amp;gt;
+         &amp;lt;Parameter Name='Begin Date' Value='01/01/2013'/&amp;gt;
+         &amp;lt;Parameter Name='End Date' Value='12/31/2013'/&amp;gt;
+         &amp;lt;Parameter Name='Hours' Value='30'/&amp;gt;
+       &amp;lt;/Filter&amp;gt;
+     &amp;lt;/p&amp;gt;]]
+   hint: "Click to list Employees that have 30 or more Avg Hrs per Week"&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;count
+   label: "%0 Employees with 130 or more Avg Hrs per Month using Monthly calendar"
+   package: "Payroll"
+   folder: "Employees"
+   parameters:
+     [[&amp;lt;p&amp;gt;
+       &amp;lt;Filter Name='? Avg Hrs = &amp;amp; above X'&amp;gt;
+         &amp;lt;Parameter Name='PRCalendar' Code='Month'/&amp;gt;
+         &amp;lt;Parameter Name='Begin Date' Value='01/01/2013'/&amp;gt;
+         &amp;lt;Parameter Name='End Date' Value='12/31/2013'/&amp;gt;
+         &amp;lt;Parameter Name='Hours' Value='130'/&amp;gt;
+       &amp;lt;/Filter&amp;gt;
+     &amp;lt;/p&amp;gt;]]
+   hint: "Click to list Employees that have 130 or more Avg Hrs per Month"&amp;gt;&amp;gt;
+
+__Employee counts approaching ACA threshold based on Average Hours in 2013 check history__
+*&amp;lt;&amp;lt;count
+   label: "%0 Employees with 28 or more Avg Hrs per Week, but less than 30 Avg Hrs per Week"
+   package: "Payroll"
+   folder: "Employees"
+   parameters:
+     [[&amp;lt;p&amp;gt;
+       &amp;lt;Filter Name='? Avg Hrs between X and Y'&amp;gt;
+         &amp;lt;Parameter Name='PRCalendar' Code='Payroll'/&amp;gt;
+         &amp;lt;Parameter Name='Begin Date' Value='01/01/2013'/&amp;gt;
+         &amp;lt;Parameter Name='End Date' Value='12/31/2013'/&amp;gt;
+         &amp;lt;Parameter Name='At Least Hours Of' Value='28'/&amp;gt;
+         &amp;lt;Parameter Name='But Below Hours Of' Value='30'/&amp;gt;
+       &amp;lt;/Filter&amp;gt;
+     &amp;lt;/p&amp;gt;]]
+   hint: "Click to list Employees that have at least 28 Avg Hrs per Week, but less than 30"&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;count
+   label: "%0 Employees with 121 or more Avg Hrs per Month, but less than 130"
+   package: "Payroll"
+   folder: "Employees"
+   parameters:
+     [[&amp;lt;p&amp;gt;
+       &amp;lt;Filter Name='? Avg Hrs between X and Y'&amp;gt;
+         &amp;lt;Parameter Name='PRCalendar' Code='Month'/&amp;gt;
+         &amp;lt;Parameter Name='Begin Date' Value='01/01/2013'/&amp;gt;
+         &amp;lt;Parameter Name='End Date' Value='12/31/2013'/&amp;gt;
+         &amp;lt;Parameter Name='At Least Hours Of' Value='121'/&amp;gt;
+         &amp;lt;Parameter Name='But Below Hours Of' Value='130'/&amp;gt;
+       &amp;lt;/Filter&amp;gt;
+     &amp;lt;/p&amp;gt;]]
+   hint: "Click to list Employees that have at least 121 or more Avg Hrs per Month, but less than 130"&amp;gt;&amp;gt;
+
+__Employee counts Below a threshold for Average Hours per Week in 2013 check history__
+*&amp;lt;&amp;lt;count
+   label: "%0 Employees with less than 30 Avg Hrs per week"
+   package: "Payroll"
+   folder: "Employees"
+   parameters:
+     [[&amp;lt;p&amp;gt;
+       &amp;lt;Filter Name='? Avg Hrs below X'&amp;gt;
+         &amp;lt;Parameter Name='PRCalendar' Code='Payroll'/&amp;gt;
+         &amp;lt;Parameter Name='Begin Date' Value='01/01/2013'/&amp;gt;
+         &amp;lt;Parameter Name='End Date' Value='12/31/2013'/&amp;gt;
+         &amp;lt;Parameter Name='Hours' Value='30'/&amp;gt;
+       &amp;lt;/Filter&amp;gt;
+     &amp;lt;/p&amp;gt;]]
+   hint: "Click to list Employees that have 30 or more Avg Hrs per week"&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;count
+   label: "%0 Employees with less than 20 Avg Hrs per week"
+   package: "Payroll"
+   folder: "Employees"
+   parameters:
+     [[&amp;lt;p&amp;gt;
+       &amp;lt;Filter Name='? Avg Hrs below X'&amp;gt;
+         &amp;lt;Parameter Name='PRCalendar' Code='Payroll'/&amp;gt;
+         &amp;lt;Parameter Name='Begin Date' Value='01/01/2013'/&amp;gt;
+         &amp;lt;Parameter Name='End Date' Value='12/31/2013'/&amp;gt;
+         &amp;lt;Parameter Name='Hours' Value='20'/&amp;gt;
+       &amp;lt;/Filter&amp;gt;
+     &amp;lt;/p&amp;gt;]]
+   hint: "Click to list Employees that have 20 or more Avg Hrs per week"&amp;gt;&amp;gt;
+&lt;/gadget&gt;
+&lt;gadget type="Template" title="ACA-SP-Stats" created="201603231924" modified="201603231925" tags="[[ACA Articles]]"&gt;return('&amp;lt;&amp;lt;count'+
+' label: "%0"'+
+' package: "Payroll"'+
+' folder: "ACA Records"'+
+' parameters: [[&amp;lt;p&amp;gt;'+
+'  &amp;lt;Filter Name=\''+ params[1] +'\'/&amp;gt;'+
+'  &amp;lt;Filter Name=\'? Effective Date Range\'&amp;gt;'+
+'   &amp;lt;Parameter Name=\'Effective_Date\' Expression=\''+ params[2] +'\'/&amp;gt;'+
+'   &amp;lt;Parameter Name=\'Effective_Date_2\' Expression=\''+ params[3] +'\'/&amp;gt;'+
+'  &amp;lt;/Filter&amp;gt;'+
+' &amp;lt;/p&amp;gt;]]'+
+' hint: "Click to list ACA Records in this number"&amp;gt;&amp;gt;');&lt;/gadget&gt;
+&lt;/gadgets&gt;</Gadget>
+		<AccessControl Value="True"/>
+		<Obsolete Value="False"/>
+		<IsBuiltIn Value="False"/>
+		<Memo/>
+		<CreateDate Value="2016-05-03T23:02:36.817"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-05-03T23:02:36.817"/>
+		<ReviseUser Value="pjohnston"/>
+		<Permissions Value="Gadget_All">
+			<item Code="Gadget_All" ID="{527BB8FF-48F6-4310-A5E4-19FFE5628189}" Assigned="True"/>
+		</Permissions>
+	</data>
+</XML>

@@ -1,0 +1,192 @@
+<XML ID="{02D38A8F-2A78-4EB2-AF9F-C43DB3104DB4}" Type="Dashboard Gadgets">
+	<data Code="Sample Gadget Syntax" ID="{99CAC4EE-31BE-4BC9-A99C-6AD03D18BF16}">
+		<Name Value="Sample Gadget Syntax"/>
+		<Code Value="Sample Gadget Syntax"/>
+		<Description Value="Sample Gadget Syntax"/>
+		<Gadget>&lt;gadgets xml:space="preserve"&gt;
+&lt;gadget type="Article" title="Sample Gadget Syntax" created="201604072058" modified="201604072101" tags="[[Action List]]"&gt;__Links__
+*[[Click here to open TEMP folder|file:\\C:\TEMP\]]
+*[[Click here to open a file|file:\\C:\SampleData\hins-PlanSelection.pdf]]
+*[[Click here to open the nQativ website|http://www.nqativ.com/]]
+
+__Count macro__
+*&amp;lt;&amp;lt;count
+  package:"Accounts Payable"
+  folder:"Invoices"
+  parameters:"&amp;lt;p&amp;gt;&amp;lt;Filter Name='New Invoices'/&amp;gt;&amp;lt;/p&amp;gt;"
+  label:"%0 New AP Invoices (NOT merged to GL)"
+  action:"Open"
+  hint:"Click to open the list of New AP Invoices (NOT merged to GL)"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;count
+  package:"Accounts Payable"
+  folder:"Invoices"
+  parameters:"&amp;lt;p&amp;gt;&amp;lt;Filter Name='New Invoices'/&amp;gt;&amp;lt;/p&amp;gt;"
+  total:"Invoice Amount"
+  label:"%0 New AP Invoices totaling $%1 (NOT merged to GL)"
+  action:"Open"
+  hint:"Click to open the list of New AP Invoices (NOT merged to GL)"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;count
+  label:"%0 Outstanding AP Invoices from before last year with a total balance of $%1"
+  total:"Invoice Balance"
+  package:"Accounts Payable"
+  folder:"Invoices"
+  parameters:
+   "&amp;lt;p&amp;gt;
+     &amp;lt;Filter Name='Outstanding Invoices'/&amp;gt;
+     &amp;lt;Filter Name='? Invoice Date Range'&amp;gt;
+      &amp;lt;Parameter Name='Begin_Date' Expression=''/&amp;gt;
+      &amp;lt;Parameter Name='End_Date' Expression='end of year - 2 years'/&amp;gt;
+     &amp;lt;/Filter&amp;gt;
+   &amp;lt;/p&amp;gt;"
+  action:"Open"
+  hint:"Click to open the list of Outstanding AP Invoices"
+&amp;gt;&amp;gt;
+
+__Report macro__
+*&amp;lt;&amp;lt;report
+   label: "Preview GL Calendars Listing"
+   package: "General Ledger"
+   report: "Calendars Listing"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Answer Name='Defaults'/&amp;gt;
+      &amp;lt;Preview/&amp;gt;
+    &amp;lt;/p&amp;gt;"
+   hint: "Preview the GL Calendars Listing with no dialog Form shown"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;report
+   label: "Preview GL Calendars Listing and show dialog"
+   package: "General Ledger"
+   report: "Calendars Listing"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Answer Name='Defaults'/&amp;gt;
+      &amp;lt;ShowForm/&amp;gt;
+      &amp;lt;Preview/&amp;gt;
+    &amp;lt;/p&amp;gt;"
+   hint: "Preview the GL Calendars Listing, but keep the dialog window open"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;report
+   label: "Print GL Calendars Listing"
+   package: "General Ledger"
+   report: "Calendars Listing"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Answer Name='Defaults'/&amp;gt;
+      &amp;lt;Print/&amp;gt;
+    &amp;lt;/p&amp;gt;"
+   hint: "Print the GL Calendars Listing"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;report
+   label: "Email GL Calendars Listing to Phil"
+   package: "General Ledger"
+   report: "Calendars Listing"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Answer Name='Defaults'/&amp;gt;
+        &amp;lt;Email
+           UseTags='False'
+           SeparatePages='False'
+           ToAddress='pjohnston@nqativ.com'
+           Subject='Current Employee Labels'
+           Prompt='False'/&amp;gt;
+        &amp;lt;Close/&amp;gt;
+    &amp;lt;/p&amp;gt;"
+   hint: "Click this to Email the GL Calendars Listing to Phil"
+&amp;gt;&amp;gt;
+
+__Action macro__
+*&amp;lt;&amp;lt;action
+   label: "Proof New AP Invoices"
+   action: "Proof"
+   package: "Accounts Payable"
+   folder: "Invoices"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Selection'&amp;gt;
+       &amp;lt;Answer Name='Defaults'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+      &amp;lt;Step Name='Review Report'&amp;gt;
+       &amp;lt;Answer Name='Exceptions Only'/&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;action
+   action: "Open"
+   label: "Financial View of Account Balances in this month three years ago"
+   package: "General Ledger"
+   folder: "Financial View - Account Balances"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Filter Name='Trial Balances'/&amp;gt;
+      &amp;lt;Calendar Value='Month'/&amp;gt;
+      &amp;lt;PeriodContains Expression='Today - 3 years'/&amp;gt;
+      &amp;lt;IncludeUnmergedEntries Value='True'/&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;action
+   action: "PrintFinancials"
+   label: "Print Financial - B/S for Current Period (this period 3 years ago)"
+   package: "General Ledger"
+   folder: "Financial Designs"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Specify Options'&amp;gt;
+       &amp;lt;Answers&amp;gt;
+	&amp;lt;DialogAnswers&amp;gt;
+         &amp;lt;Options&amp;gt;
+          &amp;lt;Period&amp;gt;
+           &amp;lt;Calendar Value='Month'/&amp;gt;
+           &amp;lt;PeriodContains Expression='Today -  3 years'/&amp;gt;
+          &amp;lt;/Period&amp;gt;
+          &amp;lt;IncludeUnmergedEntriesCheckBox Value='True'/&amp;gt;
+         &amp;lt;/Options&amp;gt;
+        &amp;lt;/DialogAnswers&amp;gt;
+        &amp;lt;SelectionAnswers&amp;gt;
+         &amp;lt;Selection&amp;gt;
+          &amp;lt;Item Table='Financial Design' Field='Name' Version='4' Operator='3'&amp;gt;
+           &amp;lt;Value1 Value='{6D05E241-9F42-4BE3-93B8-40049D3D2520}'/&amp;gt;
+          &amp;lt;/Item&amp;gt;
+         &amp;lt;/Selection&amp;gt;
+	&amp;lt;/SelectionAnswers&amp;gt;
+       &amp;lt;/Answers&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;
+*&amp;lt;&amp;lt;action
+   action: "PrintFinancials"
+   label: "Print Financials - to PDF on C:\TEMP - Monthly set of Financials  (3 years ago)"
+   package: "General Ledger"
+   folder: "Financial Designs"
+   parameters:
+    "&amp;lt;p&amp;gt;
+      &amp;lt;Step Name='Specify Options'&amp;gt;
+       &amp;lt;Answers Name='Weekly set of Financials to C:\TEMP'&amp;gt;
+	&amp;lt;DialogAnswers&amp;gt;
+         &amp;lt;Options&amp;gt;
+          &amp;lt;Period&amp;gt;
+           &amp;lt;Calendar Value='Month'/&amp;gt;
+           &amp;lt;PeriodContains Expression='Today - 3 years'/&amp;gt;
+          &amp;lt;/Period&amp;gt;
+         &amp;lt;/Options&amp;gt;
+        &amp;lt;/DialogAnswers&amp;gt;
+       &amp;lt;/Answers&amp;gt;
+      &amp;lt;/Step&amp;gt;
+    &amp;lt;/p&amp;gt;"
+&amp;gt;&amp;gt;&lt;/gadget&gt;
+&lt;/gadgets&gt;</Gadget>
+		<AccessControl Value="False"/>
+		<Obsolete Value="False"/>
+		<IsBuiltIn Value="False"/>
+		<Memo/>
+		<CreateDate Value="2016-03-30T14:42:00.580"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-25T16:21:29.907"/>
+		<ReviseUser Value="pjohnston"/>
+		<Permissions Value="Gadget_All">
+			<item Code="Gadget_All" ID="{527BB8FF-48F6-4310-A5E4-19FFE5628189}" Assigned="True"/>
+		</Permissions>
+	</data>
+</XML>

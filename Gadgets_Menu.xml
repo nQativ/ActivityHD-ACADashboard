@@ -1,0 +1,27 @@
+<XML ID="{02D38A8F-2A78-4EB2-AF9F-C43DB3104DB4}" Type="Dashboard Gadgets">
+	<data Code="Menu" ID="{04E08D4F-F06F-4F23-8A3E-47291308B160}">
+		<Name Value="Menu"/>
+		<Code Value="Menu"/>
+		<Description Value="Menu gadget, includes Main Menu and custom menu articles"/>
+		<Gadget>&lt;gadgets xml:space="preserve"&gt;
+&lt;gadget type="Article" title="ACA Menu" created="201410151700" modified="201410152025" tags="Menu"&gt;&amp;lt;&amp;lt;list filter "[tag[ACA Actions]]"&amp;gt;&amp;gt;&lt;/gadget&gt;
+&lt;gadget type="Article" title="Action Lists Menu" created="201608231519" modified="201608231519" tags="Menu"&gt;&amp;lt;&amp;lt;list filter "[tag[Action List]]"&amp;gt;&amp;gt;&lt;/gadget&gt;
+&lt;gadget type="Article" title="External Links Menu" created="201603241602" modified="201603241602" tags="Menu"&gt;[[nQativ Solutions|http://www.nqativ.com]]
+[[IRS 1099 Login|https://fire.irs.gov/firev1r/Logon.aspx]]
+[[BSO W-2 Submission|http://www.ssa.gov/bso/bsowelcome.htm]]&lt;/gadget&gt;
+&lt;gadget type="Article" title="Internal Links Menu" created="201603241556" modified="201603241556" tags="Menu"&gt;*[[nQativDemoShared|file:\\compu-share\data\csms\nQativDemoShared\]]&lt;/gadget&gt;
+&lt;gadget type="Article" title="Main Menu" created="201603241603" modified="201603241604" tags="Menu"&gt;&amp;lt;&amp;lt;slider chkACAMenu [[ACA Menu]] "ACA Menu" "Affordable Care Act - Menu"&amp;gt;&amp;gt;&amp;lt;&amp;lt;slider chkActionListsMenu [[Action Lists Menu]] "Action Lists" "Action Lists"&amp;gt;&amp;gt;&amp;lt;&amp;lt;slider chkInternalLinksMenu [[Internal Links Menu]] "Internal Links" "Internal Links"&amp;gt;&amp;gt;&amp;lt;&amp;lt;slider chkExternalLinksMenu [[External Links Menu]] "External Links" "External Links"&amp;gt;&amp;gt;&lt;/gadget&gt;
+&lt;/gadgets&gt;</Gadget>
+		<AccessControl Value="True"/>
+		<Obsolete Value="False"/>
+		<IsBuiltIn Value="False"/>
+		<Memo/>
+		<CreateDate Value="2014-10-15T15:58:58.097"/>
+		<CreateUser Value="pjohnston"/>
+		<ReviseDate Value="2016-08-23T10:30:46.030"/>
+		<ReviseUser Value="pjohnston"/>
+		<Permissions Value="Gadget_All">
+			<item Code="Gadget_All" ID="{19DA36C7-67D3-4226-9507-C09572AAB522}" Assigned="True"/>
+		</Permissions>
+	</data>
+</XML>

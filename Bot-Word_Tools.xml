@@ -1,0 +1,49 @@
+<XML ID="{4AE0010F-B62D-4A27-B137-74F578498072}" Type="Macros">
+	<data Code="Word_Tools" ID="{CB950E4E-29B1-45D7-80C9-3B82C43A7846}">
+		<Name Value="Word_Tools"/>
+		<Description Value="VBA Word Tools"/>
+		<MacroType Value="Module"/>
+		<EnableResults Value="False"/>
+		<Shortcut/>
+		<RecordType/>
+		<RunFrom/>
+		<Using/>
+		<MacroScript>
+Sub ReplaceContentControls(doc, dict)
+Dim cctrl
+Dim cctrls
+
+    For Each cctrl In doc.ContentControls
+        If (Not dict Is Nothing) Then
+            If (dict.Exists(cctrl.Tag)) Then
+                If (cctrl.Type = 8) Then
+                    If (Trim(dict.Item(cctrl.Tag)) = "Y") Then
+                        cctrl.Checked = True
+                    Else
+                        cctrl.Checked = False
+                    End If
+                End If
+                If (cctrl.Type = 0 Or cctrl.Type = 1) Then
+                    cctrl.Range.Text = dict.Item(cctrl.Tag)
+                End If
+            End If
+        Else
+            If (cctrl.Type = 8) Then _
+                cctrl.Checked = False
+            If (cctrl.Type = 0 Or cctrl.Type = 1) Then _
+                cctrl.Range.Text = cctrl.Tag
+        End If
+    Next
+End Sub</MacroScript>
+		<MacroScriptInit/>
+		<MacroScriptFinal/>
+		<AccessControl/>
+		<Permissions/>
+		<Obsolete Value="False"/>
+		<Memo/>
+		<CreateDate Value="2016-07-19T15:53:56.990"/>
+		<CreateUser Value="dconely"/>
+		<ReviseDate Value="2016-07-19T15:53:56.990"/>
+		<ReviseUser Value="dconely"/>
+	</data>
+</XML>
